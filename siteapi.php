@@ -40,16 +40,19 @@ if ( segment(0) == 'siteapi' ) {
     if ( segment(1) == 'info' ) {
         $data = [];
         $data['name'] = get_bloginfo('name');
-        $desc = esc_attr( get_option( 'siteapi_site_description' ) );
-        if ( $desc ) {
-            $data['description'] = $desc;
+        $option = get_option( '_option' );
+
+        $desc = esc_attr($option['site_description']);
+        if ( $desc ) $data['site_description'] = $desc;
+        else $data['site_description'] = get_bloginfo('description');
+
+
+        $photo = esc_attr($option['site_photo']);
+        if ( $photo ) $data['site_photo'] = $photo;
+        else if ( has_site_icon() ) {
+            $data['site_photo'] =  get_site_icon_url();
         }
-        else {
-            $data['description'] = get_bloginfo('description');
-        }
-        if ( has_site_icon() ) {
-            $data['site_icon'] =  get_site_icon_url();
-        }
+        
         wp_send_json( $data );
     }
 }
