@@ -7,6 +7,10 @@
         max-width:100%;
         height:auto;
     }
+    textarea[name="_option[html_bottom]"] {
+        width:100%;
+        height: 8em;
+    }
 </style>
 <div class="wrap">
     <h2>패밀리사이트 설정</h2>
@@ -87,6 +91,21 @@ if ( ! isset( $_REQUEST['settings-updated'] ) )
                     </script>
                 </td>
             </tr>
+
+
+
+            <tr valign="top">
+                <th scope="row">
+                    Bottom HTML
+                </th>
+                <td>
+                    <textarea name="_option[html_bottom]"><?php echo esc_attr( $options['html_bottom'] ); ?></textarea>
+                    Input Javascript, CSS, HTML codes that will be placed right before &lt;/body&gt; tag.
+                </td>
+            </tr>
+
+
+
         </table>
 
         <input type="submit">
