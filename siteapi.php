@@ -6,32 +6,7 @@
  * Description: SiteAPI for Communication of Websites.
  * Version: 0.0.2
  */
-
-
-if ( ! function_exists('di') ) {
-    function di($o) {
-        $re = print_r($o, true);
-        $re = str_replace(" ", "&nbsp;", $re);
-        $re = explode("\n", $re);
-        echo implode("<br>", $re);
-    }
-}
-
-if ( ! function_exists('segment') ) {
-    function segments($n = NULL) {
-        $u = strtolower(site_url());
-        $u = str_replace("http://", '', $u);
-        $u = str_replace("https://", '', $u);
-        $r = strtolower($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-        $uri = str_replace( "$u/", '', $r);
-        $re = explode('/', $uri);
-        if ( $n !== NULL ) return $re[$n];
-        else return $re;
-    }
-    function segment($n) {
-        return segments($n);
-    }
-}
+include plugin_dir_path(__FILE__) . '/wp-include/library.php';
 
 /**
  * @brief /siteapi/info 정보 추출
@@ -46,13 +21,12 @@ if ( segment(0) == 'siteapi' ) {
         if ( $desc ) $data['site_description'] = $desc;
         else $data['site_description'] = get_bloginfo('description');
 
-
         $photo = esc_attr($option['site_photo']);
         if ( $photo ) $data['site_photo'] = $photo;
         else if ( has_site_icon() ) {
             $data['site_photo'] =  get_site_icon_url();
         }
-        
+
         wp_send_json( $data );
     }
 }
@@ -98,7 +72,3 @@ add_action('admin_menu', function () {
         ''
     );
 } );
-
-add_shortcode('intro', function ( ) {
-    include plugin_dir_path(__FILE__) . 'template/intro.php';
-});

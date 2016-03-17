@@ -1,0 +1,3 @@
+[submodule "wp-include"]
+	path = wp-include
+	url = https://github.com/thruthesky/wp-include
