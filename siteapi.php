@@ -72,3 +72,10 @@ add_action('admin_menu', function () {
         ''
     );
 } );
+
+
+function siteapi_init() {
+    $plugin_dir = basename(dirname(__FILE__));
+    load_plugin_textdomain( 'siteapi', false, $plugin_dir ); // siteapi 를 text domain 으로 지정하면, 언어 설저에 따라 siteapi-ko_KR.mo 또는 siteapi-en_US.mo 파일을 자동으로 로드한다.
+}
+add_action('plugins_loaded', 'siteapi_init');
