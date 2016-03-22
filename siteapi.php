@@ -3,7 +3,7 @@
  * Plugin Name: SiteAPI
  * Plugin URI: http://dev.phlgo.com
  * Author: JaeHo Song
- * Description: SiteAPI for Communication of Websites.
+ * Description: SiteAPI for Family Sites.
  * Version: 0.0.2
  */
 include plugin_dir_path(__FILE__) . '/wp-include/library.php';
@@ -72,3 +72,22 @@ add_action('admin_menu', function () {
         ''
     );
 } );
+
+
+/**
+ * Hooks for SiteAPI Plugin
+ */
+add_action( 'wp_head', function () {
+    $option = get_option( '_option' );
+    $html = $option['html_head'];
+    if ( ! empty( $html ) ) {
+        echo $html;
+    }
+});
+add_action( 'wp_footer', function () {
+    $option = get_option( '_option' );
+    $html = $option['html_bottom'];
+    if ( ! empty( $html ) ) {
+        echo $html;
+    }
+});

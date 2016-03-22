@@ -7,9 +7,11 @@
         max-width:100%;
         height:auto;
     }
-    textarea[name="_option[html_bottom]"] {
+    textarea[name="_option[html_bottom]"],
+    textarea[name="_option[html_head]"]
+    {
         width:100%;
-        height: 8em;
+        height: 14em;
     }
 </style>
 <div class="wrap">
@@ -96,7 +98,19 @@ if ( ! isset( $_REQUEST['settings-updated'] ) )
 
             <tr valign="top">
                 <th scope="row">
-                    Bottom HTML
+                    HTML HEAD
+                </th>
+                <td>
+                    <textarea name="_option[html_head]"><?php echo esc_attr( $options['html_head'] ); ?></textarea>
+                    Input Javascript, Style that will be placed right before &lt;/head&gt; tag.<br>
+                    It is a good place to put META tags, Javascript, Styles.
+                </td>
+            </tr>
+
+
+            <tr valign="top">
+                <th scope="row">
+                    HTML Bootom
                 </th>
                 <td>
                     <textarea name="_option[html_bottom]"><?php echo esc_attr( $options['html_bottom'] ); ?></textarea>
