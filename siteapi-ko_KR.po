@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: SiteAPI\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Mon Mar 21 2016 08:50:21 GMT+0800 (PHT)\n"
-"PO-Revision-Date: Mon Mar 21 2016 10:11:17 GMT+0800 (PHT)\n"
+"PO-Revision-Date: Mon Mar 21 2016 10:13:41 GMT+0800 (PHT)\n"
 "Last-Translator: admin <thruthesky@gmail.com>\n"
 "Language-Team: \n"
 "Language: Korean\n"
@@ -28,7 +28,7 @@ msgstr "사이트 설명"
 
 #: setting.php:49
 msgid "Site Photo"
-msgstr ""
+msgstr "사이트 사진"
 
 #. Name of the plugin
 msgid "SiteAPI"
