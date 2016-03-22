@@ -49,14 +49,14 @@ add_action( 'wp_before_admin_bar_render', function () {
     global $wp_admin_bar; // 관리자 툴바
     $wp_admin_bar->add_menu( array(
         'id' => 'siteapi_toolbar',
-        'title' => '패밀리사이트',
+        'title' => __('SiteAPI', 'siteapi'),
         'href' => home_url('wp-admin/admin.php?page=siteapi%2Findex.php')
     ) );
 });
 add_action('admin_menu', function () {
     add_menu_page(
-        'SiteAPI Index', // 페이지 제목. ( 사실상 웹 브라우저 TITLE 창에 제목으로 표시된다. )
-        '패밀리사이트', // 관리자 페이지에서 표시 될 메뉴 이름.
+        __('Site API Index', 'siateapi'), // 페이지 제목. ( 사실상 웹 브라우저 TITLE 창에 제목으로 표시된다. )
+        __('SiteAPI', 'siteapi'), // 관리자 페이지에서 표시 될 메뉴 이름.
         'manage_options', // 권한. manage_options 권한이 있는 사용자만 이 메뉴를 볼 수 있음.
         'siteapi/index.php', // slug id. 메뉴가 클릭되면 /wp-admin/philgo-usage 와 같이 slug 로 URL 경로가 나타남.
         '',
@@ -66,12 +66,13 @@ add_action('admin_menu', function () {
     add_submenu_page(
         'siteapi/index.php', // parent slug id 가 파일인 경우,
         'Site Information',
-        '설정',
+        __('Settings', 'siteapi'),
         'manage_options',
         'siteapi/setting.php',
         ''
     );
 } );
+
 
 
 /**
@@ -91,3 +92,10 @@ add_action( 'wp_footer', function () {
         echo $html;
     }
 });
+
+
+function siteapi_init() {
+    $plugin_dir = basename(dirname(__FILE__));
+    load_plugin_textdomain( 'siteapi', false, $plugin_dir ); // siteapi 를 text domain 으로 지정하면, 언어 설저에 따라 siteapi-ko_KR.mo 또는 siteapi-en_US.mo 파일을 자동으로 로드한다.
+}
+add_action('plugins_loaded', 'siteapi_init');

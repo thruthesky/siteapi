@@ -15,7 +15,7 @@
     }
 </style>
 <div class="wrap">
-    <h2>패밀리사이트 설정</h2>
+    <h2><?php _e("Site Settings", 'siteapi')?></h2>
 </div>
 <?php
 if ( ! isset( $_REQUEST['settings-updated'] ) )
@@ -23,9 +23,13 @@ if ( ! isset( $_REQUEST['settings-updated'] ) )
 ?>
 
 <div class="wrap">
+    <?php
+
+
+    ?>
     <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
     <?php if ( false !== $_REQUEST['settings-updated'] ) : ?>
-        <div class="updated fade"><p><strong><?php _e( '설정이 저장되었습니다.', 'siteapi' ); ?></strong></p></div>
+        <div class="updated fade"><p><strong><?php _e( 'Settings saved.', 'siteapi' ); ?></strong></p></div>
     <?php endif; ?>
 
     <form method="post" action="options.php"><!-- action 의 항상 options.php 이어야 한다. -->
@@ -35,7 +39,7 @@ if ( ! isset( $_REQUEST['settings-updated'] ) )
         <table class="form-table">
             <tr valign="top">
                 <th scope="row">
-                    사이트 설명
+                    <?php _e("Site Description", 'siteapi')?>
                 </th>
                 <td>
                     <input type='text' name="_option[site_description]" value='<?php echo esc_attr( $options['site_description'] ); ?>' />
@@ -44,7 +48,7 @@ if ( ! isset( $_REQUEST['settings-updated'] ) )
             </tr>
             <tr value="top">
                 <th scope="row">
-                    사이트 사진
+                    <?php _e("Site Photo", 'siteapi')?>
                 </th>
                 <td>
                     <?php
