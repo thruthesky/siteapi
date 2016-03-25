@@ -3,9 +3,10 @@
  * Plugin Name: SiteAPI
  * Plugin URI: http://dev.phlgo.com
  * Author: JaeHo Song
- * Description: SiteAPI for Communication of Websites.
+ * Description: SiteAPI for Family Sites.
  * Version: 0.0.2
  */
+define('SITEAPI_OPTION', '_siteapi');
 include plugin_dir_path(__FILE__) . '/wp-include/library.php';
 
 /**
@@ -15,7 +16,16 @@ if ( segment(0) == 'siteapi' ) {
     if ( segment(1) == 'info' ) {
         $data = [];
         $data['name'] = get_bloginfo('name');
-        $option = get_option( '_option' );
+        $option = get_option( SITEAPI_OPTION );
+        /**
+         * @deprecated The code below is to convert old version data to new one.
+         * See README.md
+         */
+        if ( empty($option) ) {
+            $option = get_option( '_option' );
+            update_option(SITEAPI_OPTION, $option);
+            $option = get_option( SITEAPI_OPTION );
+        }
 
         $desc = esc_attr($option['site_description']);
         if ( $desc ) $data['site_description'] = $desc;
@@ -26,7 +36,6 @@ if ( segment(0) == 'siteapi' ) {
         else if ( has_site_icon() ) {
             $data['site_photo'] =  get_site_icon_url();
         }
-
         wp_send_json( $data );
     }
 }
@@ -43,7 +52,7 @@ add_action( 'admin_init', function() {
      * 즉, HTML FORM 에서 name="siteapi[description]", name="siteapi[no]" 와 같이 지정하면
      * 추가적인 register_setting 을 하지 않아도 전체 값이 하나의 siteapi 배열에 저장된다.
      */
-    register_setting( 'siteapi', '_option' );
+    register_setting( 'siteapi', SITEAPI_OPTION );
 });
 add_action( 'wp_before_admin_bar_render', function () {
     global $wp_admin_bar; // 관리자 툴바
@@ -73,6 +82,8 @@ add_action('admin_menu', function () {
     );
 } );
 
+display_option_on('wp_head', SITEAPI_OPTION, 'html_head');
+display_option_on('wp_footer', SITEAPI_OPTION, 'html_bottom');
 
 function siteapi_init() {
     $plugin_dir = basename(dirname(__FILE__));

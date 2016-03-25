@@ -1,5 +1,5 @@
 <style>
-    input[name='_option[site_description]'] {
+    input[name='<?php echo SITEAPI_OPTION?>[site_description]'] {
         width: 100%;
         box-sizing: border-box;
     }
@@ -7,9 +7,11 @@
         max-width:100%;
         height:auto;
     }
-    textarea[name="_option[html_bottom]"] {
+    textarea[name="<?php echo SITEAPI_OPTION?>[html_bottom]"],
+    textarea[name="<?php echo SITEAPI_OPTION?>[html_head]"]
+    {
         width:100%;
-        height: 8em;
+        height: 14em;
     }
 </style>
 <div class="wrap">
@@ -32,7 +34,7 @@ if ( ! isset( $_REQUEST['settings-updated'] ) )
 
     <form method="post" action="options.php"><!-- action 의 항상 options.php 이어야 한다. -->
         <?php settings_fields( 'siteapi' ); /** nonce 라든지 각종 필수 Hidden 필드를 출력 */?>
-        <?php $options = get_option( '_option' ); ?>
+        <?php $options = get_option( SITEAPI_OPTION ); ?>
 
         <table class="form-table">
             <tr valign="top">
@@ -40,7 +42,7 @@ if ( ! isset( $_REQUEST['settings-updated'] ) )
                     <?php _e("Site Description", 'siteapi')?>
                 </th>
                 <td>
-                    <input type='text' name="_option[site_description]" value='<?php echo esc_attr( $options['site_description'] ); ?>' />
+                    <input type='text' name="<?php echo SITEAPI_OPTION?>[site_description]" value='<?php echo esc_attr( $options['site_description'] ); ?>' />
                     사이트 설명을 한글 50 글자 이내로 입력하십시오.
                 </td>
             </tr>
@@ -59,7 +61,7 @@ if ( ! isset( $_REQUEST['settings-updated'] ) )
                         wp_enqueue_script('thickbox');
                     }
                     $option_name = 'site_photo';
-                    $name = "_option[$option_name]";
+                    $name = SITEAPI_OPTION . "[$option_name]";
                     $src = $options[$option_name];
                     ?>
                     <input type="hidden" type="text" name="<?php echo $name?>" value="<?php echo $src?>">
@@ -100,10 +102,22 @@ if ( ! isset( $_REQUEST['settings-updated'] ) )
 
             <tr valign="top">
                 <th scope="row">
-                    Bottom HTML
+                    HTML HEAD
                 </th>
                 <td>
-                    <textarea name="_option[html_bottom]"><?php echo esc_attr( $options['html_bottom'] ); ?></textarea>
+                    <textarea name="<?php echo SITEAPI_OPTION?>[html_head]"><?php echo esc_attr( $options['html_head'] ); ?></textarea>
+                    Input Javascript, Style that will be placed right before &lt;/head&gt; tag.<br>
+                    It is a good place to put META tags, Javascript, Styles.
+                </td>
+            </tr>
+
+
+            <tr valign="top">
+                <th scope="row">
+                    HTML Bootom
+                </th>
+                <td>
+                    <textarea name="<?php echo SITEAPI_OPTION?>[html_bottom]"><?php echo esc_attr( $options['html_bottom'] ); ?></textarea>
                     Input Javascript, CSS, HTML codes that will be placed right before &lt;/body&gt; tag.
                 </td>
             </tr>
