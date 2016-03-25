@@ -9,6 +9,9 @@
 define('SITEAPI_OPTION', '_siteapi');
 include plugin_dir_path(__FILE__) . '/wp-include/library.php';
 
+write_log("siteapi run");
+
+
 /**
  * @brief /siteapi/info 정보 추출
  */
