@@ -8,6 +8,7 @@
  */
 define('SITEAPI_OPTION', '_siteapi');
 
+if ( ! function_exists('dog') ) return;
 dog("siteapi run");
 
 
