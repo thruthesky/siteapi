@@ -7,9 +7,8 @@
  * Version: 0.0.2
  */
 define('SITEAPI_OPTION', '_siteapi');
-include plugin_dir_path(__FILE__) . '/wp-include/library.php';
 
-write_log("siteapi run");
+dog("siteapi run");
 
 
 /**
