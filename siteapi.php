@@ -9,7 +9,10 @@
 /**
  *
  */
-if ( ! defined('WP_LIBRARY') ) die("Activate WP-Library");
+if ( ! defined('WP_LIBRARY') ) {
+    echo "Activate WP-Library";
+    return;
+}
 define('SITEAPI_OPTION', '_siteapi');
 
 if ( ! function_exists('dog') ) return;
