@@ -6,8 +6,11 @@
  * Description: SiteAPI for Family Sites.
  * Version: 0.0.2
  */
+/**
+ *
+ */
+if ( ! defined('WP_LIBRARY') ) die("Activate WP-Library");
 define('SITEAPI_OPTION', '_siteapi');
-
 dog("siteapi run");
 
 
