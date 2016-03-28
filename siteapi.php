@@ -9,8 +9,8 @@
 /**
  *
  */
-if ( ! defined('WP_LIBRARY') ) {
-    echo "Activate WP-Library";
+if ( ! defined('ABC_LIBRARY') ) {
+    echo "Activate ABC-Library";
     return;
 }
 define('SITEAPI_OPTION', '_siteapi');
