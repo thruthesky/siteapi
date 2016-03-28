@@ -9,13 +9,14 @@
 /**
  *
  */
+//echo "<hr>SITEAPI<hr>";
 if ( ! defined('WP_LIBRARY') ) {
-    echo "Activate WP-Library";
     return;
 }
+
+dog('siteapi loaded --- ' . date('r'));
 define('SITEAPI_OPTION', '_siteapi');
 
-if ( ! function_exists('dog') ) return;
 dog("siteapi run");
 
 
