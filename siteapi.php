@@ -9,8 +9,8 @@
 /**
  *
  */
-//echo "<hr>SITEAPI<hr>";
-if ( ! defined('WP_LIBRARY') ) {
+if ( ! defined('ABC_LIBRARY') ) {
+    echo "Activate ABC-Library";
     return;
 }
 
