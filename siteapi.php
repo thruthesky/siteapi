@@ -9,10 +9,6 @@
 /**
  *
  */
-
-
-
-
 if ( ! defined('ABC_LIBRARY') ) {
     echo "SiteAPI: Activate WP-Library";
     return;
@@ -21,7 +17,6 @@ else {
     dog('siteapi');
 }
 define('SITEAPI_OPTION', '_siteapi');
-
 
 
 
