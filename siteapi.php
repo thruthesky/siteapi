@@ -9,11 +9,20 @@
 /**
  *
  */
-if ( ! defined('WP_LIBRARY') ) die("Activate WP-Library");
+
+
+
+
+if ( ! defined('ABC_LIBRARY') ) {
+    echo "SiteAPI: Activate WP-Library";
+    return;
+}
+else {
+    dog('siteapi');
+}
 define('SITEAPI_OPTION', '_siteapi');
 
-if ( ! function_exists('dog') ) return;
-dog("siteapi run");
+
 
 
 /**
