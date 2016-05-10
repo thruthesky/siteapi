@@ -14,6 +14,38 @@
         height: 14em;
     }
 </style>
+
+<script>
+    jQuery(function($) {
+        $('.delete-button').click(function(){
+            var name = $(this).attr('target-name');
+            var $target = $('.photo-upload-button[target-name="'+name+'"]');
+            $target.find('input').val('');
+            $target.find('img').attr('src', '');
+        });
+    });
+
+    jQuery(document).ready(function($) {
+        $('.photo-upload-button').click(function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var custom_uploader = wp.media({
+                    title: '사이트 사진 선택',
+                    button: {
+                        text: '선택하기'
+                    },
+                    multiple: false
+                })
+                .on('select', function() {
+                    var attachment = custom_uploader.state().get('selection').first().toJSON();
+                    $this.find('input').val(attachment.url);
+                    $this.find('img').attr('src', attachment.url);
+                })
+                .open();
+        });
+    });
+</script>
+
 <div class="wrap">
     <h2><?php _e("Site Settings", 'siteapi')?></h2>
 </div>
@@ -46,7 +78,7 @@ if ( ! isset( $_REQUEST['settings-updated'] ) )
                     사이트 설명을 한글 50 글자 이내로 입력하십시오.
                 </td>
             </tr>
-            <tr value="top">
+            <tr valign="top">
                 <th scope="row">
                     <?php _e("Site Photo", 'siteapi')?>
                 </th>
@@ -64,39 +96,104 @@ if ( ! isset( $_REQUEST['settings-updated'] ) )
                     $name = SITEAPI_OPTION . "[$option_name]";
                     $src = $options[$option_name];
                     ?>
-                    <input type="hidden" type="text" name="<?php echo $name?>" value="<?php echo $src?>">
-                    <div>
-                        <div class="upload-button">
-                        <div class="photo">
+
+                    <div class="photo-upload-button" target-name="<?php echo $name?>">
+                        <input type="hidden" type="text" name="<?php echo $name?>" value="<?php echo $src?>">
+                        <div>
+                            <div class="photo">
                             <img src="<?php echo $src?>"/></div>
                             <div class="button">
-                                사이트 사진 등록 하기 ( 너비 512 픽셀, 높이 512 픽셀 )
+                                사이트 대표 아이콘(사진) 등록 하기 ( jpg 또는 png 파일. 너비 512 픽셀, 높이 512 픽셀 )
                             </div>
                         </div>
                     </div>
-                    <script>
-                        jQuery(document).ready(function($) {
-                            $('.upload-button').click(function(e) {
-                                e.preventDefault();
 
-                                var custom_uploader = wp.media({
-                                        title: '사이트 사진 선택',
-                                        button: {
-                                            text: '선택하기'
-                                        },
-                                        multiple: false
-                                    })
-                                    .on('select', function() {
-                                        var attachment = custom_uploader.state().get('selection').first().toJSON();
-                                        $('input[name="<?php echo $name?>"]').val(attachment.url);
-                                        $('.photo img').attr('src', attachment.url);
-                                    })
-                                    .open();
-                            });
-                        });
-                    </script>
+                    <div class="button delete-button" target-name="<?php echo $name?>">
+                        사진 삭제
+                    </div>
                 </td>
             </tr>
+
+
+
+
+            <tr valign="top">
+                <th scope="row">
+                    <?php _e("Site Title Image", 'siteapi')?>
+                </th>
+                <td>
+                    <?php
+                    $option_name = 'site_title_image';
+                    $name = SITEAPI_OPTION . "[$option_name]";
+                    if ( isset($options[$option_name]) ) $src = $options[$option_name];
+                    else $src = '';
+                    ?>
+                    <div class="photo-upload-button" target-name="<?php echo $name?>">
+                        <input type="hidden" type="text" name="<?php echo $name?>" value="<?php echo $src?>">
+                        <div>
+                            <div class="photo">
+                                <img src="<?php echo $src?>"/></div>
+                            <div class="button">
+                                사이트 상단 헤더(타이틀 이미지) ( jpg 또는 png 파일. 너비 1600 픽셀, 높이 200 ~ 400 픽셀 )
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button delete-button" target-name="<?php echo $name?>">사진 삭제</div>
+                </td>
+            </tr>
+
+            <tr valign="top">
+                <th scope="row">
+                    <?php _e("Site Temp Image", 'siteapi')?>
+                </th>
+                <td>
+                    <?php
+                    $option_name = 'site_temp_image_1';
+                    $name = SITEAPI_OPTION . "[$option_name]";
+                    if ( isset($options[$option_name]) ) $src = $options[$option_name];
+                    else $src = '';
+                    ?>
+                    <div class="photo-upload-button" target-name="<?php echo $name?>">
+                        <input type="hidden" type="text" name="<?php echo $name?>" value="<?php echo $src?>">
+                        <div>
+                            <div class="photo">
+                                <img src="<?php echo $src?>"/></div>
+                            <div class="button">
+                                임시 사진. 나중에 필요 할 때 사용.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button delete-button" target-name="<?php echo $name?>">사진 삭제</div>
+                </td>
+            </tr>
+
+            <tr valign="top">
+                <th scope="row">
+                    <?php _e("Site Title Image", 'siteapi')?>
+                </th>
+                <td>
+                    <?php
+                    $option_name = 'site_temp_image_2';
+                    $name = SITEAPI_OPTION . "[$option_name]";
+                    if ( isset($options[$option_name]) ) $src = $options[$option_name];
+                    else $src = '';
+                    ?>
+                    <div class="photo-upload-button" target-name="<?php echo $name?>">
+                        <input type="hidden" type="text" name="<?php echo $name?>" value="<?php echo $src?>">
+                        <div>
+                            <div class="photo">
+                                <img src="<?php echo $src?>"/></div>
+                            <div class="button">
+                                임시 사진 2. 나중에 필요 할 때 사용.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button delete-button" target-name="<?php echo $name?>">사진 삭제</div>
+                </td>
+            </tr>
+
+
+
 
 
 
